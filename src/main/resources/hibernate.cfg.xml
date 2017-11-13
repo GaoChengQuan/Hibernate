@@ -1,8 +1,8 @@
 <!DOCTYPE hibernate-configuration PUBLIC
 	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
 	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
-
 <hibernate-configuration>
+	<!-- Configuration获取加载配置文件的管理类对象 -->
 	<!-- 通常一个session-factory节点代表一个数据库 
 		session-factory生成的session代表和数据库的会话-->
 	<session-factory>
@@ -11,8 +11,25 @@
         <property name="hibernate.connection.url">jdbc:mysql:///java1707</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">root</property>
+        <!-- 数据库方法配置， hibernate在运行的时候，会根据不同的方言生成符合当前数据库语法的sql，因为不同数据库在细节上有差别 -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
 		
-		<!-- 加载所有的映射 -->
+		<!-- 2. 其他相关配置 -->
+		<!-- 2.1  显示hibernate在运行时候执行的sql语句 -->
+		<property name="hibernate.show_sql">true</property>
+		<!-- 2.2  打印控制台的时候格式化sql -->
+		<property name="hibernate.format_sql">true</property>
+		<!-- 2.3 自动建表 
+		#hibernate.hbm2ddl.auto create		自动建表.每次框架运行都会创建新的表.以前表将会被覆盖,表数据会丢失.(开发环境中测试使用)
+		#hibernate.hbm2ddl.auto create-drop 自动建表.create-drop 每次在创建sessionFactory时候执行创建表；
+											当调用sesisonFactory的close方法的时候，删除表！.(开发环境中测试使用)
+		#hibernate.hbm2ddl.auto update(推荐使用) 自动生成表.如果已经存在不会再生成.如果表有变动.自动更新表(不会删除任何数据).
+		#hibernate.hbm2ddl.auto validate	校验.不自动生成表.当映射文件的内容与数据库表结构不一样的时候就报错！
+		 -->
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		
+		
+		<!-- 3、加载所有的映射 -->
 		<mapping resource="com/situ/hibernate/pojo/Student.hbm.xml"/>
 		
 	</session-factory>

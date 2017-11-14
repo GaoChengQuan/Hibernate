@@ -30,7 +30,9 @@
 		
 		
 		<!-- 3、加载所有的映射 -->
-		<mapping resource="com/situ/hibernate/pojo/Student.hbm.xml"/>
+		<mapping resource="com/situ/hibernate/one2many/Student.hbm.xml"/>
+		<mapping resource="com/situ/hibernate/one2many/Banji.hbm.xml"/>
+		<mapping resource="com/situ/hibernate/one2many/Course.hbm.xml"/>
 		
 	</session-factory>
 </hibernate-configuration>

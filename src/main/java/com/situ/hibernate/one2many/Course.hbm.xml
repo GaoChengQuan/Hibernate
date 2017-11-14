@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<!-- 映射文件: 映射一个实体类对象；  描述一个对象最终实现可以直接保存对象数据到数据库中。  -->
+<hibernate-mapping package="com.situ.hibernate.pojo" auto-import="true">
+		<class name="Course" table="course">
+			<id name="id" column="id">
+				<generator class="native"></generator>
+			</id>
+			
+			<property name="name" column="name" type="java.lang.String"></property>
+			
+			<!-- 
+				所以在多对多关系里面，要让一方放弃维护多对多关系，一般来说放弃要看业务的方向，
+				这里业务：班级选课程，所以就有Banji维护这个多对多的外键关系，Course表放弃维护这个关系
+			 -->
+			<set name="banjis" table="banji_course" inverse="true">
+				<key column="course_id"></key>
+				<many-to-many class="Banji" column="banji_id"/>
+			</set>
+			
+		</class>
+</hibernate-mapping>

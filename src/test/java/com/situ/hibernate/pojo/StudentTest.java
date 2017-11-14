@@ -23,6 +23,7 @@ public class StudentTest {
 		//开启事务
 		Transaction transaction = session.beginTransaction();
 		Student student = new Student();//没有id，没有和Session建立关联：临时状态
+		student.setId(999);
 		student.setName("王五");//临时状态
 		//保存数据库
 		session.save(student);//有id,在session缓存中:持久化状态

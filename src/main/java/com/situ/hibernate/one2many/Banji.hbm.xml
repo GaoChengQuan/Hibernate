@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<!-- 映射文件: 映射一个实体类对象；  描述一个对象最终实现可以直接保存对象数据到数据库中。  -->
+<hibernate-mapping package="com.situ.hibernate.pojo" auto-import="true">
+		<class name="Banji" table="banji">
+			<id name="id" column="id">
+				<generator class="native"></generator>
+			</id>
+			
+			<property name="name" column="name" type="java.lang.String"></property>
+			
+			<!-- 一对多
+				name:属性名
+				column：数据库表中外键名字
+				class:关联的类名字
+			 -->
+			 <!-- 级联操作:cascade
+			 	 save-update:级联保存更新
+			 	 delete:级联删除
+			 	 all:save-update +　delete
+			 	 级联操作：并没有提高效率只是简化操作，少写代码。
+			 	 delete级联删除应该慎用
+			  -->
+			  <!-- inverse:性能优化，提高关系维护的性能
+			   		true:banji表不维护这个外键关系
+			   		false(默认值):banji维护外键关系
+			  		inverse:控制反转 (我不控制，交给别人来维护控制)
+			  		inverse="true"
+			   -->
+			<set name="students" cascade="save-update" inverse="true">
+				<key column="banji_id"></key>
+				<one-to-many class="Student"/>
+			</set>
+			
+			<!-- 级联操作:cascade
+			 	 save-update:级联保存更新
+			 	 delete:级联删除
+			 	 all:save-update +　delete
+			 	 级联操作：并没有提高效率只是简化操作，少写代码。建议只使用save-update
+			 	 delete级联删除应该慎用，这个太危险。、
+			  -->
+			<set name="courses" table="banji_course" cascade="save-update">
+				<key column="banji_id"></key>
+				<many-to-many class="Course" column="course_id"/>
+			</set>
+			
+		</class>
+</hibernate-mapping>

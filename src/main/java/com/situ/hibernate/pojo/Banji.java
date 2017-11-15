@@ -60,7 +60,7 @@ public class Banji {
 
 	@Override
 	public String toString() {
-		return "Banji [id=" + id + ", name=" + name + ", students=" + students + "]";
+		return "Banji [id=" + id + ", name=" + name + "]";
 	}
 
 }

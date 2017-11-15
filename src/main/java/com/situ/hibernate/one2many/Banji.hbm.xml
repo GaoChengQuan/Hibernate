@@ -30,7 +30,7 @@
 			  		inverse:控制反转 (我不控制，交给别人来维护控制)
 			  		inverse="true"
 			   -->
-			<set name="students" cascade="save-update" inverse="true">
+			<set name="students" cascade="save-update" inverse="true" lazy="extra">
 				<key column="banji_id"></key>
 				<one-to-many class="Student"/>
 			</set>
@@ -42,7 +42,7 @@
 			 	 级联操作：并没有提高效率只是简化操作，少写代码。建议只使用save-update
 			 	 delete级联删除应该慎用，这个太危险。、
 			  -->
-			<set name="courses" table="banji_course" cascade="save-update">
+			<set name="courses" table="banji_course" >
 				<key column="banji_id"></key>
 				<many-to-many class="Course" column="course_id"/>
 			</set>

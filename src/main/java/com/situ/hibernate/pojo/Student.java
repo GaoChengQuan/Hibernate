@@ -16,13 +16,18 @@ public class Student implements Serializable {
 	public Banji getBanji() {
 		return banji;
 	}
-
+	
 	public void setBanji(Banji banji) {
 		this.banji = banji;
 	}
 
 	public Student() {
 		super();
+	}
+	
+	public Student(Integer id, String name) {
+		this.id = id;
+		this.name = name;
 	}
 
 	public Student(Integer id, String name, Integer age, String gender, String address, Date birthday) {

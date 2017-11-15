@@ -78,4 +78,17 @@ public class Demo {
 		// 提交事物
 		transaction.commit();
 	}
+	
+	@Test
+	public void set() {
+		Session session = HibernateUtils.openSession();
+		session.beginTransaction();
+		Banji banji = (Banji) session.get(Banji.class, 1);
+		System.out.println(banji.getName());
+		System.out.println("------");
+		System.out.println(banji.getStudents().size());  //  SQL
+		
+		session.getTransaction().commit();
+		session.close();
+	}
 }
